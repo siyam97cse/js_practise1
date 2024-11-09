@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffle Word</title>
+</head>
+<body>
+    <p id="shuffled-word">Dhaka</p>
+    <button id="shuffle-btn">Shuffle Word</button>
+
+    <script>
+        // Function to shuffle the word
+        function shuffleWord() {
+            let w = "Dhaka";
+            let w_length = w.length;
+            let shuffle_word = "";
+
+            // Shuffle the word by generating random indices within the valid range (0-4)
+            for (let i = 0; i < w_length; i++) {
+                let random_index = Math.floor(Math.random() * w_length);
+                shuffle_word = shuffle_word + w[random_index];
+            }
+
+            // Update the paragraph with the shuffled word
+            let paragraph = document.getElementById("shuffled-word");
+            paragraph.innerHTML = shuffle_word;
+        }
+
+        // Set up event listener for button click
+        let button = document.getElementById("shuffle-btn");
+        button.addEventListener("click", shuffleWord);
+    </script>
+</body>
+</html>
