@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffle Word Game</title>
+   
+</head>
+<body>
+    <h1>Shuffle Word Game</h1>
+    <div id="game-container">
+        <p id="shuffled-word">Press "Shuffle Word" to start!</p>
+        <button id="shuffle-btn">Shuffle Word</button>
+        <br>
+        <input type="text" id="user-input" placeholder="Type your guess here">
+        <button id="submit-btn">Submit Guess</button>
+        <p id="feedback"></p>
+    </div>
+
+    <script>
+        let originalWord = "Dhaka"; // Original word to guess
+        let shuffledWord = ""; // Shuffled version of the word
+
+        // Function to shuffle the word
+        function shuffleWord(word) {
+            let letters = word.split(""); // Convert word to an array of letters
+            for (let i = letters.length - 1; i > 0; i--) {
+                let randomIndex = Math.floor(Math.random() * (i + 1));
+                [letters[i], letters[randomIndex]] = [letters[randomIndex], letters[i]]; // Swap letters
+            }
+            return letters.join(""); // Join back to form a string
+        }
+
+        // Handle shuffle button click
+        document.getElementById("shuffle-btn").addEventListener("click", () => {
+            shuffledWord = shuffleWord(originalWord);
+            document.getElementById("shuffled-word").textContent = shuffledWord;
+            document.getElementById("feedback").textContent = ""; // Clear feedback
+            document.getElementById("user-input").value = ""; // Clear input
+        });
+
+        // Handle submit button click
+        document.getElementById("submit-btn").addEventListener("click", () => {
+            const userGuess = document.getElementById("user-input").value.trim();
+            const feedback = document.getElementById("feedback");
+            if (userGuess.toLowerCase() === originalWord.toLowerCase()) {
+                feedback.textContent = "Correct! You guessed the word.";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Try again!";
+                feedback.style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>
